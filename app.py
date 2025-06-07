@@ -56,6 +56,7 @@ st.markdown("Distance between diffraction peaks on screen (cm): "+str(diff_x_m*1
 # Plot
 
 # find closest indices to match 5 cm intervals
+x_cm = x_m * 100  # Convert x from m to cm
 target_values = []
 target_values_pos = np.arange(0, np.max(x_cm), 5)
 for i in range(len(target_values_pos)):
@@ -91,7 +92,6 @@ axs[0].set_ylabel('y (micron)')
 axs[0].set_title('Rectangular Aperture')
 
 # ---- Subplot 2: Diffraction Pattern ----
-x_cm = x_m * 100  # Convert x from m to cm
 target_values = list(-np.flip(np.arange(0, np.max(x_cm), 5)).astype(int)) + \
                 [0] + list(np.arange(0, np.max(x_cm), 5).astype(int))
 
