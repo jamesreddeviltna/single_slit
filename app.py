@@ -105,7 +105,8 @@ axs[1].set_yticklabels(target_values)
 axs[1].set_xlabel('x (cm)')
 axs[1].set_ylabel('y (cm)')
 axs[1].set_title('Diffraction Pattern')
-axs[1].set_clim((0, zlim))
+im = axs[1].imshow(inten / np.max(inten), cmap='hot')
+im.set_clim((0, zlim))
 
 # ---- Streamlit Display ----
 st.pyplot(fig)
