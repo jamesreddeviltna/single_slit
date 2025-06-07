@@ -19,7 +19,7 @@ color = st.slider("Wavelength (nm)", 400, 700, 633)
 lamda = color*1e-9
 
 #l = 1.25
-l = st.slider("Screen Distance (m)", 0.5, 2, 1.25, step=0.05)
+l = st.slider("Screen Distance (m)", 0.5, 2, 1.25)
 
 #w = 20
 w = int(st.slider("Slit Width (micron)", 10, 200, 50, step=2.5)/2.5)
