@@ -22,7 +22,7 @@ lamda = color*1e-9
 l = st.slider("Screen Distance (m)", min_value=0.5, max_value=2.0, value=1.25, step=0.05)
 
 #w = 20
-w = int(st.slider("Slit Width (micron)", 10, 200, 50, step=2.5)/2.5)
+w = int(st.slider("Slit Width (micron)", 10.0, 200.0, 50.0, step=2.5)/2.5)
 #h = 100
 h = int(st.slider("Slit Height (micron)", 10, 200, 250, step=2.5)/2.5)
 
