@@ -27,7 +27,7 @@ w = int(st.slider("Slit Width (micron)", 10.0, 500.0, 50.0, step=2.5)/2.5)
 h = int(st.slider("Slit Height (micron)", 10.0, 500.0, 250.0, step=2.5)/2.5)
 
 #zlim = 0.1 # color adjust
-zlim = st.slider("Colorscale", 0.02, 1.0, 0.1, step=0.02)
+zlim = st.slider("Colorscale", 0.01, 4.0, 0.1, step=0.01)
 
 #create rectangular aperture
 aperture = np.zeros((aper_size,aper_size))
