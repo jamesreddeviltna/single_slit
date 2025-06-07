@@ -51,7 +51,7 @@ h_m = h * metre_per_pixel
 diff_spatial = 1 / w_m
 diff_x_m = lamda * diff_spatial * l
 #print("Distance between diffraction peaks on screen (cm):", diff_x_m*100)
-st.markdown("Distance between diffraction peaks on screen (cm): {8.3f}".format(diff_x_m*100))
+st.markdown("Distance between diffraction peaks on screen (cm): "+str(diff_x_m*100))
 
 # Plot
 plt.figure(figsize=(12,6))
