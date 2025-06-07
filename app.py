@@ -24,12 +24,12 @@ l = st.slider("Screen Distance (m)", min_value=0.5, max_value=2.0, value=1.25, s
 #w = 20
 w = int(st.slider("Slit Width (micron)", 10.0, 200.0, 50.0, step=2.5)/2.5)
 #h = 100
-h = int(st.slider("Slit Height (micron)", 10, 200, 250, step=2.5)/2.5)
+h = int(st.slider("Slit Height (micron)", 10.0, 200.0, 250.0, step=2.5)/2.5)
 
 #zlim = 0.1 # color adjust
-zlim = st.slider("Colorscale", 0.02, 1, 0.1, step=0.02)
+zlim = st.slider("Colorscale", 0.02, 1.0, 0.1, step=0.02)
 
-#create rectagular aperture
+#create rectangular aperture
 aperture = np.zeros((aper_size,aper_size))
 center = (aper_size//2,aper_size//2)
 aperture[center[0]-h//2:center[0]+h//2,center[1]-w//2:center[1]+w//2] = 1
