@@ -54,19 +54,6 @@ diff_x_m = lamda * diff_spatial * l
 st.markdown("Distance between diffraction peaks on screen (cm): "+str(diff_x_m*100))
 
 # Plot
-plt.figure(figsize=(12,6))
-plt.subplot(1,2,1)
-plt.xticks(ticks=np.arange(0,aper_size,int(aper_size/5)),
-           labels=np.arange(0,aper_size*metre_per_pixel*1e6,0.2*aper_size*metre_per_pixel*1e6).astype(int))
-plt.yticks(ticks=np.arange(0,aper_size,int(aper_size/5)),
-           labels=np.arange(0,aper_size*metre_per_pixel*1e6,0.2*aper_size*metre_per_pixel*1e6).astype(int))
-plt.xlabel('x (micron)')
-plt.ylabel('y (micron)')
-plt.imshow(aperture, cmap='gray')
-plt.title('Rectangular Aperture')
-
-plt.subplot(1,2,2)
-x_cm = x_m*100  # screen position array in cm
 
 # find closest indices to match 5 cm intervals
 target_values = []
@@ -83,11 +70,42 @@ for value in target_values:
   closest_index = np.abs(x_cm - value).argmin()
   closest_indices.append(closest_index)
 
-plt.xticks(ticks=closest_indices,labels=target_values,rotation=90)
-plt.yticks(ticks=closest_indices,labels=target_values)
-plt.title('Diffraction Pattern')
-plt.xlabel('x (cm)')
-plt.ylabel('y (cm)')
-plt.imshow(inten/np.max(inten), cmap='hot')
-plt.clim((0,zlim))
-plt.show()
+# Create the figure
+fig, axs = plt.subplots(1, 2, figsize=(12, 6))
+
+# ---- Subplot 1: Rectangular Aperture ----
+axs[0].imshow(aperture, cmap='gray')
+
+xticks = np.arange(0, aper_size, int(aper_size/5))
+xticklabels = (np.arange(0, aper_size*metre_per_pixel*1e6, 0.2*aper_size*metre_per_pixel*1e6)).astype(int)
+axs[0].set_xticks(xticks)
+axs[0].set_xticklabels(xticklabels)
+
+yticks = np.arange(0, aper_size, int(aper_size/5))
+yticklabels = (np.arange(0, aper_size*metre_per_pixel*1e6, 0.2*aper_size*metre_per_pixel*1e6)).astype(int)
+axs[0].set_yticks(yticks)
+axs[0].set_yticklabels(yticklabels)
+
+axs[0].set_xlabel('x (micron)')
+axs[0].set_ylabel('y (micron)')
+axs[0].set_title('Rectangular Aperture')
+
+# ---- Subplot 2: Diffraction Pattern ----
+x_cm = x_m * 100  # Convert x from m to cm
+target_values = list(-np.flip(np.arange(0, np.max(x_cm), 5)).astype(int)) + \
+                [0] + list(np.arange(0, np.max(x_cm), 5).astype(int))
+
+closest_indices = [np.abs(x_cm - val).argmin() for val in target_values]
+
+axs[1].imshow(inten / np.max(inten), cmap='hot')
+axs[1].set_xticks(closest_indices)
+axs[1].set_xticklabels(target_values, rotation=90)
+axs[1].set_yticks(closest_indices)
+axs[1].set_yticklabels(target_values)
+axs[1].set_xlabel('x (cm)')
+axs[1].set_ylabel('y (cm)')
+axs[1].set_title('Diffraction Pattern')
+axs[1].set_clim((0, zlim))
+
+# ---- Streamlit Display ----
+st.pyplot(fig)
